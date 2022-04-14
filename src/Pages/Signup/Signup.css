@@ -1,0 +1,16 @@
+.signup-form input{
+    display: block;
+    width: 50%;
+    height: 50px;
+    padding-left: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    font-size: 18px;
+
+}
+
+input:focus {
+    outline: none !important;
+    border-color: rgb(248, 41, 255);
+    box-shadow: 0 0 15px rgba(201, 156, 33, 0.993);
+}

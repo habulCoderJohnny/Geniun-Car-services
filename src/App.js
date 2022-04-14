@@ -7,6 +7,7 @@ import NotFound404 from './Pages/NotFound404/NotFound404';
 import ServiceDetail from './Pages/ServiceDetail/ServiceDetail';
 import Footer from './Pages/Shared/Footer/Footer';
 import Header from './Pages/Shared/Header/Header';
+import Signup from './Pages/Signup/Signup';
 
 function App() {
  
@@ -19,6 +20,7 @@ function App() {
         <Route path='/service/:serviceId' element={<ServiceDetail/>}></Route>
         <Route path='/about' element={<About />}></Route>
         <Route path='/login' element={<Login />}></Route>
+        <Route path='/signup' element={<Signup />}></Route>
         <Route path='*' element={<NotFound404/>}></Route>
         
       </Routes>

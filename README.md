@@ -10,7 +10,7 @@ page href change to as Link to component
 * created banner & navbar with bootstrap
 * Responsive site with plain css | bootstrap
 * and set dynamic year in footer
-* navbar: fix reload href="" to Link to=""
+* navbar: fix reload page [ href="" to Link to=""]
 * useParameter for dynamically navigate 
 * jump same page using by "id"
-* 
+
