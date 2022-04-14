@@ -1,0 +1,25 @@
+.services-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+/* services cart Responsive */
+
+/* phone */
+@media only screen and (max-width:576px){
+    .services-container{
+        grid-template-columns: 1fr;
+        grid-gap: 40px;
+    }
+    .service img {
+        width: 300px;
+    }
+}
+/* IPad  */
+@media only screen and (max-width:577px) and (min-width:992px){
+    .services-container{
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+}
