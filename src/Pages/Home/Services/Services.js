@@ -12,7 +12,7 @@ const Services = () => {
         .then(data=> setServices(data));
     },[])
     return (
-        <div className='container'>
+        <div id='go-to-services' className='container'>
             <h1 className='text-primary text-center m-5'>Current Our Services:  {services.length}</h1>
             {/* 1st: create <Service compo> then sent data in props service name-e */}
             <div className='services-container'> 

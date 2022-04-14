@@ -4,7 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # what are I doing this project
 * Created many component in Home components 
 * Routes install & used
+page href change to as Link to component 
 * data fetch service & expert in components and
+* import img from local storage
 * created banner & navbar with bootstrap
 * Responsive site with plain css | bootstrap
 * and set dynamic year in footer

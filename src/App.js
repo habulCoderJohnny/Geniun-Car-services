@@ -2,19 +2,26 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import About from './Pages/About/About';
 import Home from './Pages/Home/Home/Home';
+import Login from './Pages/Login/Login';
+import NotFound404 from './Pages/NotFound404/NotFound404';
+import ServiceDetail from './Pages/ServiceDetail/ServiceDetail';
 import Footer from './Pages/Shared/Footer/Footer';
 import Header from './Pages/Shared/Header/Header';
 
 function App() {
+ 
   return (
     <div>
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home />}></Route>
+        <Route path='/home' element={<Home />}></Route>
+        <Route path='/service/:serviceId' element={<ServiceDetail/>}></Route>
         <Route path='/about' element={<About />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='*' element={<NotFound404/>}></Route>
+        
       </Routes>
-
-
 
       <Footer></Footer>
     </div>
@@ -22,3 +29,19 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+/* 
+ url-1st variable declore :serviceId  hocca dynanmic data dekhabe 1st ServiceDetail name compo create korsi line no:17 (URL parameter) then go service.js
+
+
+login Component
+ rsc maro then App.js make Route and also check nav bar to  
+ */
