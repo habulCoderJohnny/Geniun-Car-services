@@ -7,20 +7,22 @@ const Login = () => {
     // const refContainer = useRef(initialValue);
     const emailRef = useRef('');
     const passwordRef = useRef('');
-    // 5th
+    // 5th for toggle func
     const navigate = useNavigate();
-    // 3nd
-    const logInSubmit =event =>{
-        event.preventDefault();
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        console.log(email, password);
-    }
-    //4th for navigate signup page
-    const navigateSignup = event =>{
+      //4th for navigate signup page
+      const navigateSignup = event =>{
         // 6th
         navigate('/signup');
     }
+    // 3rd for taking input data diffent way 1
+    const logInSubmit = event =>{
+        event.preventDefault();
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        console.log('email:',email, 'password:',password);
+        //Validation  
+    }
+  
     return (
         <div className='container w-50 mx-auto'>
             <h2 className='text-primary text-center mt-2'>Please login</h2>
