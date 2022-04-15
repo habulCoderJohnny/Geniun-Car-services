@@ -13,4 +13,10 @@ page href change to as Link to component
 * navbar: fix reload page [ href="" to Link to=""]
 * useParameter for dynamically navigate 
 * jump same page using by "id"
+* created login & signup form 
+* useRef & signup/login toggle
+* firebase Auth , require Auth & (redirect the site what 
+* visitor wanted/desire to go to visit) 
+
+
 

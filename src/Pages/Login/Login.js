@@ -1,35 +1,54 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Login = () => {
-    // 1st use    of     useRef
-    // const refContainer = useRef(initialValue);
+    // 1st-useRef
     const emailRef = useRef('');
     const passwordRef = useRef('');
-    // 5th for toggle func
+    // 4th-a visitor
+    const location = useLocation();
+    //4th  visitor's desire page info
+    const from = location?.state?.from?.pathname || "/";
+
+    // login-auth-3rd 
+    const [signInWithEmailAndPassword,user] = useSignInWithEmailAndPassword(auth);
+    // 2nd-b for toggle func
     const navigate = useNavigate();
-      //4th for navigate signup page
-      const navigateSignup = event =>{
-        // 6th
-        navigate('/signup');
+    //2nd-a for navigate Register page
+    const navigateRegister = event => {
+        // 2ndc
+        navigate('/register');
     }
-    // 3rd for taking input data diffent way 1
-    const logInSubmit = event =>{
+       //login-auth-3rd-c|user Register korle than navigate kore home e pathabo
+       if (user) {
+        navigate('/home');
+        // 4th-b visitor site will go redirect of visitor's desire page
+        navigate(from,{replace:true});
+    }
+
+    //taking input data diffent way 1
+    const logInSubmit = event => {
         event.preventDefault();
+        // 1st-b useRef
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        console.log('email:',email, 'password:',password);
-        //Validation  
+        // console.log('email:', email, 'password:', password);
+        //Validation if(){}
+
+        // login-auth-3rd-a
+        signInWithEmailAndPassword(email, password) 
     }
-  
+
     return (
         <div className='container w-50 mx-auto'>
             <h2 className='text-primary text-center mt-2'>Please login</h2>
             <Form onSubmit={logInSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control ref={emailRef} type="email" placeholder="Enter email" />
+                    <Form.Control ref={emailRef} /*1st-a useRef*/ type="email"  placeholder="Enter email" /> 
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -37,18 +56,18 @@ const Login = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control ref={passwordRef} type="password" placeholder="Password" required/>
+                    <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
-                {/* Toggle */}
-                <p>New to Genius car? <Link className='text-danger pe-auto text-decoration-none' to='/signup' onClick={navigateSignup}>Plz Signup</Link></p>
+                {/*2nd Toggle */}
+                <p>New to Genius car? <Link className='text-danger pe-auto text-decoration-none' to='/register' onClick={navigateRegister}>Plz Register</Link></p>
                 <Button variant="primary" type="submit">
                     Login
                 </Button>
             </Form>
-        
+
         </div>
     );
 };
