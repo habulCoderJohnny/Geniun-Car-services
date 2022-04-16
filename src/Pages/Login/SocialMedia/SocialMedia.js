@@ -2,37 +2,32 @@ import React from 'react';
 import google from '../../../Images/social/google.png';
 import fb from '../../../Images/social/fb.jpg';
 import github from '../../../Images/social/github.png';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { useNavigate } from 'react-router-dom';
 const SocialMediaLogin = () => {
     // google-1st
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-    // g-c 
+    //github-1st
+    const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
+    // signin to navigate
     const navigate = useNavigate();
     // social btn blink issue 
     let errorBtnElement;
-    //g-a
+    //error showing
     // return: errorBtnElement=
-    if (error) {
-        errorBtnElement = <div>
-                <p className='text-danger text-center'>Error: {error.message}</p>
-            </div>
+    if (error || error1) {
+        errorBtnElement = <p className='text-danger text-center'>Error: {error?.message} {error1?.message}</p>
     }
-
     // if (loading) {
-    //     return <p>Loading...</p>;
+    // return <p>Loading...</p>;
     // }
 
-    //g-b
-    if (user) {
+    // user signin to navigate
+    if (user || user1) {
         // 1st-d
         navigate ('/home');
-        // return (
-        //     <div>
-        //         <p>Signed In User: {user.email}</p>
-        //     </div>
-        // );
+  
     }
 
     return (
@@ -49,12 +44,12 @@ const SocialMediaLogin = () => {
                 <span className='px-2'>Sign In with Google</span>
             </button>
             {/* fb signin btn  */}
-            <button className='btn btn-primary w-50 d-block mx-auto my-2'>
+            <button className='btn btn-danger w-50 d-block mx-auto my-2'>
                 <img style={{ width: '36px', marginLeft: '6px' }} src={fb} alt="" />
                 <span className='px-2'>Sign In with Facebook</span>
             </button>
             {/* github signin btn  */}
-            <button className='btn btn-dark w-50 d-block mx-auto my-2'>
+            <button onClick={()=>signInWithGithub()} className='btn btn-dark w-50 d-block mx-auto my-2'>
                 <img style={{ width: '30px' }} src={github} alt="" />
                 <span className='px-2'>Sign In with Github</span>
             </button>

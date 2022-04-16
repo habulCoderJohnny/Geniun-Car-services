@@ -21,6 +21,7 @@ page href change to as Link to component
 * visitor wanted/desire to go to visit) 
 * signing with social media
 * signInWithGoogle auth,navigate done: element return issue fixed 
-
+* implement-github-login-system
+* term & condition checkbox update
 
 

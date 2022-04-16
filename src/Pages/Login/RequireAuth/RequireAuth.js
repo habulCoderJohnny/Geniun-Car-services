@@ -10,10 +10,10 @@ const RequireAuth = ({children}) => {
     const location = useLocation();
 
     // 2nd, jodi user login na thake tahohe then navigate kore login e pathabo
-    if(loading){
-        return;
+    // if(loading){
+    //     return;
 
-    }
+    // }
     if (!user) {
         return <Navigate to="/login" state={{from:location}} replace />;
     }
