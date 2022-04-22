@@ -6,9 +6,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 import SocialMediaLogin from './SocialMedia/SocialMedia';
-// import 'react-toastify/dist/ReactToastify.css';
-// import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import { async } from '@firebase/util';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const Login = () => {
     // 1st-useRef
@@ -69,15 +70,16 @@ const Login = () => {
         const email = emailRef.current.value;
         if (email) {
             await sendPasswordResetEmail(email);
-            // toast('Sent email');
+            toast('Sent email');
         }
         else{
-            // toast('please enter your email address');
+            toast('please enter your email address');
         }
     }
 
     return (
         <div className='container w-50 mx-auto'>
+            <PageTitle title='Login'></PageTitle>
             <h2 className='text-primary text-center font-weight-light mt-2'>
                 <u>Please login</u></h2>
             <Form onSubmit={logInSubmit}>
@@ -100,7 +102,7 @@ const Login = () => {
                 {/* Reset password  */}
                 <p>Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</button></p>
         <SocialMediaLogin></SocialMediaLogin>
-        {/* <ToastContainer /> */}
+        <ToastContainer/>
 
         </div>
     );

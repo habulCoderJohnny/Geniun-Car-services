@@ -5,6 +5,7 @@ import './Register.css';
 import auth from '../../firebase.init';
 import SocialMedia from '../Login/SocialMedia/SocialMedia';
 import Loading from '../Shared/Loading/Loading';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 
 const Register = () => {
@@ -14,7 +15,7 @@ const Register = () => {
         user,
         loading,
         error,
-           ] = useCreateUserWithEmailAndPassword(auth);
+           ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
@@ -58,6 +59,7 @@ const Register = () => {
     }
     return (
         <div>
+            <PageTitle title='Signup'> </PageTitle>
             <h2 className='text-center mt-4 text-primary'>Create your Profile</h2>
             <form onSubmit={registerFormSubmit} className='register-form'>
                 <input type="text" name="name" id="1" placeholder='Your Name' required />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Service.css';
+import PageTitle from '../../Shared/PageTitle/PageTitle';
 const Service = ({service}) => {
     const {id,img, price, description, name} = service;
     //url-3rd declore useNavigate
@@ -11,7 +12,8 @@ const Service = ({service}) => {
         navigate(`/service/${id}`);
     }
     return (
-        <div className='service'>
+        <div className='service' id='go-to-services'>
+            <PageTitle title='Services'></PageTitle>
             <img src={img} alt="" />
             <h3>Name:  {name}</h3>
             <h5>Price ${price}</h5>
