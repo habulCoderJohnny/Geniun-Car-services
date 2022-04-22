@@ -3,14 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import './Service.css';
 const Service = ({service}) => {
     const {id,img, price, description, name} = service;
-    //url-3nd declore useNavigate
+    //url-3rd declore useNavigate
     const navigate = useNavigate();
     //url-2nd declore event handler
     const navigateToServiceDetail = id =>{
         //url-4th
         navigate(`/service/${id}`);
-
-
     }
     return (
         <div className='service'>

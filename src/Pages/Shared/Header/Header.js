@@ -29,16 +29,15 @@ const Header = () => {
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link as={Link} to="/about">About</Nav.Link>
+                        <Nav.Link as={Link} to="/about">ABOUT</Nav.Link>
                         {/*//1st for condition log/signup menu in navbar*/}
-                       { user ? <button className="btn btn-link text-white" onClick={handleSignout}>Signout</button> 
+                       { user ? <button className="btn btn-link text-white" onClick={handleSignout}>SIGNOUT</button> 
                        :
                        <Nav.Link as={Link} to="/login">
-                            Login
+                            LOGIN
                         </Nav.Link>}
                     </Nav>
                 </Navbar.Collapse>

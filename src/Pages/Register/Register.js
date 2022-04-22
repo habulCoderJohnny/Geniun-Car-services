@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import './Register.css';
 import auth from '../../firebase.init';
 import SocialMedia from '../Login/SocialMedia/SocialMedia';
+import Loading from '../Shared/Loading/Loading';
+
 
 const Register = () => {
     //reg-auth-3rd 
@@ -14,19 +16,30 @@ const Register = () => {
         error,
            ] = useCreateUserWithEmailAndPassword(auth);
 
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    const [agree, setAgree] = useState(false);
+
+
     //2nd-toggle Navigate part: for navigate to login form
     const navigate = useNavigate();
     const navigateLogin = event => {
         navigate('/login');
     }
 
-      //reg-auth-3rd-b|user Register korle than navigate kore home e pathabo
-    if (user) {
-        navigate('/home');
+    if (loading) {
+        return <Loading></Loading> 
     }
 
+      //reg-auth-3rd-b|user Register korle than navigate kore home e pathabo
+    if (user) {
+        console.log('user', user);  
+        // navigate('/home');
+    }
+
+
       
-    const registerFormSubmit = event => {
+    const registerFormSubmit = async event => {
         event.preventDefault();
         // 1st taking input data
         // taking input data diffent way 2
@@ -34,10 +47,14 @@ const Register = () => {
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
+        // const agree = event.target.terms.checked;
         // validation if(){}
 
         //reg-auth-3rd-a 
         createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+        console.log('Updated profile');
+        navigate('/home');
     }
     return (
         <div>
@@ -49,12 +66,14 @@ const Register = () => {
 
                 <input type="password" name="password" id="3" placeholder='Your secure password' required />
                 {/* Checkbox */}
-                <input type="checkbox" name="terms" id="terms" />
-                <label className='ps-2' htmlFor="terms">Accept Terms & Condition</label>
+                <input onClick={() => setAgree(!agree)}  type="checkbox" name="terms" id="terms" />
+                {/* <label className='ps-2' htmlFor="terms">Accept Terms & Condition</label> */}
+                <label className={`ps-2 ${agree ? '' : 'text-danger'}`} htmlFor="terms">Accept Genius Car Terms and Conditions</label>
                 {/* Toggle */}
-                <p className='mt-2'>Already have an Account? <Link className='text-primary pe-auto text-decoration-none' to='/login' onClick={navigateLogin}>Plz Login</Link></p>
-                <input className='btn btn-primary w-25 mx-auto btn-rounded' type="submit" value="Register..." />
+                
+                <input disabled={!agree} className='btn btn-primary w-25 mx-auto btn-rounded' type="submit" value="Register..." />
             </form>
+            <p className='mt-2 text-center'>Already have an Account? <Link className='text-primary pe-auto text-decoration-none' to='/login' onClick={navigateLogin}>Plz Login</Link></p>
             <SocialMedia></SocialMedia>
         </div>
     );

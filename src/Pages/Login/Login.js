@@ -1,10 +1,14 @@
-import { async } from '@firebase/util';
+
 import React, { useEffect, useRef } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form} from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading/Loading';
 import SocialMediaLogin from './SocialMedia/SocialMedia';
+// import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+import { async } from '@firebase/util';
 
 const Login = () => {
     // 1st-useRef
@@ -17,6 +21,7 @@ const Login = () => {
 
     // login-auth-3rd 
     const [signInWithEmailAndPassword,user,loading,error] = useSignInWithEmailAndPassword(auth);
+
      //foget password recover
     const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
     // 2nd-b for toggle func
@@ -26,13 +31,6 @@ const Login = () => {
         // 2ndc
         navigate('/register');
     }
-    // Reset Password function
-     const resetPassword = async()=>{
-        const email = emailRef.current.value;
-        await sendPasswordResetEmail(email);
-        alert('Sent email');
-
-     }
 
         //taking input data diffent way 1
         const logInSubmit = event => {
@@ -56,10 +54,26 @@ const Login = () => {
         }
      },[user,from,navigate]);
 
+     if (loading) {
+         return <Loading></Loading>
+     }
+
     // error showing (conditional render)
     let errorBtnElement;
     if (error) {
         errorBtnElement = <p className='text-danger text-center'>Error: {error?.message}</p>
+    }
+
+    // Reset Password function
+    const resetPassword = async () => {
+        const email = emailRef.current.value;
+        if (email) {
+            await sendPasswordResetEmail(email);
+            // toast('Sent email');
+        }
+        else{
+            // toast('please enter your email address');
+        }
     }
 
     return (
@@ -75,16 +89,18 @@ const Login = () => {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
                 </Form.Group>
-                {errorBtnElement}
+                  {/*error return*/}
+                  {errorBtnElement}
                 <Button variant="btn btn-primary btn-rounded w-50 mx-auto d-block mb-2" type="submit">
                     Login
                 </Button>
-                {/*2nd Toggle */}
-                <p>New to Genius car? <Link className='text-primary pe-auto text-decoration-none' to='/register' onClick={navigateRegister}>Plz Register</Link></p>
-                {/* Reset password  */}
-                <p>Forget Password? <Link className='text-primary pe-auto text-decoration-none' to='/register' onClick={resetPassword}>Reset Password</Link></p>
             </Form>
+            {/*2nd Toggle */}
+            <p>New to Genius car? <Link className='text-primary pe-auto text-decoration-none' to='/register' onClick={navigateRegister}>Plz Register</Link></p>
+                {/* Reset password  */}
+                <p>Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</button></p>
         <SocialMediaLogin></SocialMediaLogin>
+        {/* <ToastContainer /> */}
 
         </div>
     );

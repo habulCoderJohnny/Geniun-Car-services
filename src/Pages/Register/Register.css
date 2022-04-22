@@ -12,7 +12,6 @@
     font-size: 18px;
 
 }
-
 input:focus {
     outline: none !important;
     border-color: rgb(248, 41, 255);

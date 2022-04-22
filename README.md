@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # what are I doing this project step by step
 * Created many component in Home components 
 * Routes install & used
-page href change to as Link to component 
+  page href change to as Link to component 
 * data fetch service & expert in components and
 * import img from local storage
 * created banner & navbar with bootstrap
@@ -17,7 +17,7 @@ page href change to as Link to component
 * created login & signup form 
 * useRef & signup/login toggle
 * firebase 
- * create account with email-pass | login/logout Auth , require Auth & (redirect the site what 
+* create account with email-pass | login/logout Auth , require Auth & (redirect the site what 
 * visitor wanted/desire to go to visit) 
 * signing with social media
 * signInWithGoogle auth,navigate done: element return issue fixed 
