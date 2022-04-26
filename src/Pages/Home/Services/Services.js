@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Service from '../Service/Service';
 import './Services.css';
 
-
 //services data fetch & map korbo then data dekhanor jonno services ar child compo <service> create korbo then sekhane data dekhabo
 const Services = () => {
     const [services, setServices] = useState([]);
