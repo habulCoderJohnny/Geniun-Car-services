@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Service.css';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
 const Service = ({service}) => {
-    const {id,img, price, description, name} = service;
+    const {_id,img, price, description, name} = service;
     //url-3rd declore useNavigate
     const navigate = useNavigate();
     //url-2nd declore event handler
@@ -18,7 +18,7 @@ const Service = ({service}) => {
             <h3>Name:  {name}</h3>
             <h5>Price ${price}</h5>
             <p>{description}</p>
-            <button onClick={()=>navigateToServiceDetail(id)} className="btn btn-primary mb-2">Book: {name}</button>
+            <button onClick={()=>navigateToServiceDetail(_id)} className="btn btn-primary mb-2">Book: {name}</button>
 
         </div>
     );
