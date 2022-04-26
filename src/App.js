@@ -9,6 +9,7 @@ import Register from './Pages/Register/Register';
 import NotFound404 from './Pages/NotFound404/NotFound404';
 import RequireAuth from './Pages/Login/RequireAuth/RequireAuth';
 import Checkout from './Pages/Checkout/Checkout/Checkout';
+import AddService from './Pages/AddService/AddService';
 
 function App() {
  
@@ -23,6 +24,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/checkout' element={<RequireAuth><Checkout/></RequireAuth>}></Route>
+        <Route path='/add-service' element={<RequireAuth><AddService/></RequireAuth>}></Route>
         <Route path='*' element={<NotFound404/>}></Route>
       </Routes>
     </div>
