@@ -9,6 +9,7 @@ import SocialMediaLogin from './SocialMedia/SocialMedia';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import PageTitle from '../Shared/PageTitle/PageTitle';
+import axios from 'axios';
 
 const Login = () => {
     // 1st-useRef
@@ -33,7 +34,7 @@ const Login = () => {
     }
 
         //taking input data diffent way 1
-        const logInSubmit = event => {
+        const logInSubmit = async event => {
             event.preventDefault();
             // 1st-b useRef
             const email = emailRef.current.value;
@@ -42,7 +43,11 @@ const Login = () => {
             //Validation if(){}
     
             // login-auth-3rd-a
-            signInWithEmailAndPassword(email, password) 
+            await signInWithEmailAndPassword(email, password);
+            const {data} = await axios.post('http://localhost:5000/login', {email});
+            console.log(data);
+            localStorage.setItem('accessToken', data.accessToken);
+            navigate(from,{replace:true});
         }
     
        //login-auth-3rd-c|user Register korle than navigate kore home e pathabo
@@ -51,7 +56,6 @@ const Login = () => {
             console.log(user);
             // navigate('/home');
             // 4th-b visitor site will go redirect of visitor's desire page
-            navigate(from,{replace:true});
         }
      },[user,from,navigate]);
 
