@@ -2,32 +2,38 @@ import React from 'react';
 import google from '../../../Images/social/google.png';
 import fb from '../../../Images/social/fb.jpg';
 import github from '../../../Images/social/github.png';
-import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 const SocialMediaLogin = () => {
     // google-1st
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    //Fb-1st
+    const [signInWithFacebook, fbUser, fbLoading, fbError] = useSignInWithFacebook(auth);
     //github-1st
-    const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
+    const [signInWithGithub, githubUser, gitLoading, gitError] = useSignInWithGithub(auth);
+        // visitor
+        const location = useLocation();
+        // visitor's desire page info
+        const from = location?.state?.from?.pathname || "/";
+
     // signin to navigate
     const navigate = useNavigate();
     // social btn blink issue 
     let errorBtnElement;
     //error showing
     // return: errorBtnElement=
-    if (error || error1) {
-        errorBtnElement = <p className='text-danger text-center'>Error: {error?.message} {error1?.message}</p>
+    if (error ||fbError|| gitError) {
+        errorBtnElement = <p className='text-danger text-center'>Error: {error?.message} {gitError?.message}</p>
     }
-    if (loading) {
+    if (loading||fbLoading|| gitLoading ) {
     return <Loading></Loading>
     }
 
     // user signin to navigate
-    if (user || user1) {
-        // 1st-d
-        navigate ('/home');
+    if (user ||fbUser|| githubUser) {
+        navigate(from,{replace:true});
   
     }
 
@@ -45,7 +51,7 @@ const SocialMediaLogin = () => {
                 <span className='px-2'>Sign In with Google</span>
             </button>
             {/* fb signin btn  */}
-            <button className='btn btn-danger w-50 d-block mx-auto my-2'>
+            <button onClick={()=>signInWithFacebook()} className='btn btn-danger w-50 d-block mx-auto my-2'>
                 <img style={{ width: '36px', marginLeft: '6px' }} src={fb} alt="" />
                 <span className='px-2'>Sign In with Facebook</span>
             </button>

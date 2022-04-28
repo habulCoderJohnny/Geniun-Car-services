@@ -7,8 +7,7 @@ import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 import SocialMediaLogin from './SocialMedia/SocialMedia';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
-import { async } from '@firebase/util';
+import { toast } from 'react-toastify';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const Login = () => {
@@ -49,6 +48,7 @@ const Login = () => {
        //login-auth-3rd-c|user Register korle than navigate kore home e pathabo
      useEffect(()=>{
         if (user) {
+            console.log(user);
             // navigate('/home');
             // 4th-b visitor site will go redirect of visitor's desire page
             navigate(from,{replace:true});
@@ -66,14 +66,14 @@ const Login = () => {
     }
 
     // Reset Password function
-    const resetPassword = async () => {
+    const resetPassword = async() => {
         const email = emailRef.current.value;
         if (email) {
             await sendPasswordResetEmail(email);
-            toast('Sent email');
+            toast('Sent email Reset your Password!');
         }
         else{
-            toast('please enter your email address');
+            toast('Please enter your email address!');
         }
     }
 
@@ -102,7 +102,6 @@ const Login = () => {
                 {/* Reset password  */}
                 <p>Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</button></p>
         <SocialMediaLogin></SocialMediaLogin>
-        <ToastContainer/>
 
         </div>
     );

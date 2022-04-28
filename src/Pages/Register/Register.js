@@ -6,6 +6,7 @@ import auth from '../../firebase.init';
 import SocialMedia from '../Login/SocialMedia/SocialMedia';
 import Loading from '../Shared/Loading/Loading';
 import PageTitle from '../Shared/PageTitle/PageTitle';
+import { toast } from 'react-toastify';
 
 
 const Register = () => {
@@ -31,6 +32,11 @@ const Register = () => {
     if (loading) {
         return <Loading></Loading> 
     }
+
+    // if (true) {
+    //     toast("send Email for Verification check inbox/spam!")
+
+    // }
 
       //reg-auth-3rd-b|user Register korle than navigate kore home e pathabo
     if (user) {
@@ -62,11 +68,11 @@ const Register = () => {
             <PageTitle title='Signup'> </PageTitle>
             <h2 className='text-center mt-4 text-primary'>Create your Profile</h2>
             <form onSubmit={registerFormSubmit} className='register-form'>
-                <input type="text" name="name" id="1" placeholder='Your Name' required />
+                <input type="text" name="name" placeholder='Your Name' required />
 
-                <input type="email" name="email" id="2" placeholder='Your valid email' required />
+                <input type="email" name="email"  placeholder='Your valid email' required />
 
-                <input type="password" name="password" id="3" placeholder='Your secure password' required />
+                <input type="password" name="password"  placeholder='Your secure password' required />
                 {/* Checkbox */}
                 <input onClick={() => setAgree(!agree)}  type="checkbox" name="terms" id="terms" />
                 {/* <label className='ps-2' htmlFor="terms">Accept Terms & Condition</label> */}

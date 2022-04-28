@@ -11,6 +11,7 @@ import RequireAuth from './Pages/Login/RequireAuth/RequireAuth';
 import Checkout from './Pages/Checkout/Checkout/Checkout';
 import AddService from './Pages/AddService/AddService';
 import ManageServices from './Pages/ManageServices/ManageServices';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
  
@@ -24,11 +25,12 @@ function App() {
         <Route path='/about' element={<About />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
-        <Route path='/checkout' element={<RequireAuth><Checkout/></RequireAuth>}></Route>
+        <Route path='/checkout/:serviceId' element={<Checkout/>}></Route>
         <Route path='/add-service' element={<RequireAuth><AddService/></RequireAuth>}></Route>
         <Route path='/manage' element={<RequireAuth><ManageServices/></RequireAuth>}></Route>
         <Route path='*' element={<NotFound404/>}></Route>
       </Routes>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }
