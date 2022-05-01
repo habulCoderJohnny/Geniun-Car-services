@@ -6,6 +6,7 @@ import { useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 
 import auth from '../../../firebase.init';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
+import useToken from '../../../hooks/useToken';
 const SocialMediaLogin = () => {
     // google-1st
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -13,10 +14,13 @@ const SocialMediaLogin = () => {
     const [signInWithFacebook, fbUser, fbLoading, fbError] = useSignInWithFacebook(auth);
     //github-1st
     const [signInWithGithub, githubUser, gitLoading, gitError] = useSignInWithGithub(auth);
-        // visitor
-        const location = useLocation();
-        // visitor's desire page info
-        const from = location?.state?.from?.pathname || "/";
+    // visitor
+    const location = useLocation();
+    // visitor's desire page info
+    const from = location?.state?.from?.pathname || "/";
+    // for jwt token
+    const [token] = useToken(user ||fbUser|| githubUser);
+
 
     // signin to navigate
     const navigate = useNavigate();
@@ -32,7 +36,7 @@ const SocialMediaLogin = () => {
     }
 
     // user signin to navigate
-    if (user ||fbUser|| githubUser) {
+    if (token) {
         navigate(from,{replace:true});
   
     }

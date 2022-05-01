@@ -8,6 +8,6 @@ const useServiceDetail = serviceId =>{
         .then(res=> res.json())
         .then(data=>setService(data))
     },[serviceId]);
-    return [service]
+    return [service];
 }
 export default useServiceDetail;

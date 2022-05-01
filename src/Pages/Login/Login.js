@@ -6,10 +6,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 import SocialMediaLogin from './SocialMedia/SocialMedia';
-import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import PageTitle from '../Shared/PageTitle/PageTitle';
-import axios from 'axios';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     // 1st-useRef
@@ -25,6 +24,8 @@ const Login = () => {
 
      //foget password recover
     const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+    // for jwt token
+    const [token] = useToken(user);
     // 2nd-b for toggle func
     const navigate = useNavigate();
     //2nd-a for navigate Register page
@@ -41,25 +42,21 @@ const Login = () => {
             const password = passwordRef.current.value;
             // console.log('email:', email, 'password:', password);
             //Validation if(){}
-    
             // login-auth-3rd-a
             await signInWithEmailAndPassword(email, password);
-            const {data} = await axios.post('http://localhost:5000/login', {email});
-            console.log(data);
-            localStorage.setItem('accessToken', data.accessToken);
-            navigate(from,{replace:true});
+
         }
     
        //login-auth-3rd-c|user Register korle than navigate kore home e pathabo
-     useEffect(()=>{
-        if (user) {
-            console.log(user);
+        if (token) {
+            console.log(token);
+            navigate(from,{replace:true});
             // navigate('/home');
             // 4th-b visitor site will go redirect of visitor's desire page
         }
-     },[user,from,navigate]);
 
-     if (loading) {
+
+     if (loading ||sending) {
          return <Loading></Loading>
      }
 

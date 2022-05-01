@@ -7,20 +7,18 @@ import SocialMedia from '../Login/SocialMedia/SocialMedia';
 import Loading from '../Shared/Loading/Loading';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 import { toast } from 'react-toastify';
+import useToken from '../../hooks/useToken';
 
 
 const Register = () => {
     //reg-auth-3rd 
-    const [
-        createUserWithEmailAndPassword,
-        user,
-        loading,
-        error,
-           ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+    const [createUserWithEmailAndPassword,user, loading,error,] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
     const [agree, setAgree] = useState(false);
+        // for jwt token
+        const [token] = useToken(user);
 
 
     //2nd-toggle Navigate part: for navigate to login form
@@ -34,7 +32,7 @@ const Register = () => {
     }
 
       //reg-auth-3rd-b|user Register korle than navigate kore home e pathabo
-    if (user) {
+    if (token) {
         console.log('user', user); 
         navigate('/home'); 
     }
