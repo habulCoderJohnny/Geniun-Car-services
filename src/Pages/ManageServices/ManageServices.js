@@ -8,7 +8,7 @@ const ManageServices = () => {
         const proceed = window.confirm('Are you sure?');
         if (proceed) {
             //gettingdata 
-            const url = `http://localhost:5000/service/${id}`;
+            const url = `https://agile-plains-88208.herokuapp.com/service/${id}`;
             fetch(url,{method:'DELETE'})
             .then(res=> res.json())
             .then(data=>{

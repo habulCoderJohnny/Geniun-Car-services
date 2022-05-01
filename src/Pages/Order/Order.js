@@ -18,7 +18,7 @@ const Order = () => {
 
         const getOrderDataFromDb = async()=>{
             const email = user?.email; 
-            const url = `http://localhost:5000/order?email=${email}`;
+            const url = `https://agile-plains-88208.herokuapp.com/order?email=${email}`;
             //Send jwt token in the server
             try{
                 const {data} = await axiosPrivate.get(url);
