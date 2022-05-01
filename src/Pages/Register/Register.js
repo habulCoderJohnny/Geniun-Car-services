@@ -33,15 +33,10 @@ const Register = () => {
         return <Loading></Loading> 
     }
 
-    // if (true) {
-    //     toast("send Email for Verification check inbox/spam!")
-
-    // }
-
       //reg-auth-3rd-b|user Register korle than navigate kore home e pathabo
     if (user) {
-        console.log('user', user);  
-        // navigate('/home');
+        console.log('user', user); 
+        navigate('/home'); 
     }
 
 
@@ -61,7 +56,7 @@ const Register = () => {
         createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName: name });
         console.log('Updated profile');
-        navigate('/home');
+        toast("Send Email for Verification check inbox/spam!")
     }
     return (
         <div>
