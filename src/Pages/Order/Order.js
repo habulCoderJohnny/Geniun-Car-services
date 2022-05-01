@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import axiosPrivate from '../../Api/axiosPrivate';
 import auth from '../../firebase.init';
+import OrderList from './OrderList';
 
 
 const Order = () => {
@@ -34,6 +35,10 @@ const Order = () => {
     return (
         <div>
             <h1>Your Orders: {orders.length}</h1>
+            {
+                orders.map(order =><OrderList key={order._id} order = {order}></OrderList>)
+            }
+
         </div>
     );
 };
