@@ -1,4 +1,5 @@
 import { signOut } from 'firebase/auth';
+import Loading from '../../Pages/Shared/Loading/Loading';
 import React, { useEffect, useState }  from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +15,7 @@ const Order = () => {
     const [orders, setOrders] = useState([]);
     const navigate = useNavigate();
     useEffect(()=>{
+
         const getOrderDataFromDb = async()=>{
             const email = user?.email; 
             const url = `http://localhost:5000/order?email=${email}`;
@@ -24,14 +26,20 @@ const Order = () => {
             }
             catch(error){
                 console.log(error.message);
-                if (error.response.status ===403 ||error.response.status === 401){
+                if (error.response.status ===401 ||error.response.status === 403){
                     signOut(auth);
                     navigate('/login');
                 }
             }
         }
         getOrderDataFromDb();
-    },[user])
+    },[user]);
+
+    if (!user) {
+        return <Loading></Loading>
+    }
+
+
     return (
         <div>
             <h1>Your Orders: {orders.length}</h1>

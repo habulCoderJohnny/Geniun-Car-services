@@ -9,7 +9,8 @@ const Services = () => {
         fetch('http://localhost:5000/service')
         .then(res=> res.json())
         .then(data=> setServices(data));
-    },[])
+    },[]);
+
     return (
         <div id='go-to-services' className='container'>
             <h1 className='text-primary text-center m-5'>Current Our Services:  {services.length}</h1>

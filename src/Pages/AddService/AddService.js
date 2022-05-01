@@ -2,8 +2,6 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 // import { useNavigate } from 'react-router-dom';
 // import { toast } from 'react-toastify';
-
-
 const AddService = () => {
     // const navigate = useNavigate();
     const { register, handleSubmit} = useForm();
@@ -31,7 +29,7 @@ const AddService = () => {
         <div className='w-50 mx-auto'>
             <h2>Please Add a Service!</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column column-gap-4">
-                <input {...register("name", { required: true, maxLength: 20 })}  className='mb-2' placeholder='Name' />
+                <input {...register("name", { required: true, maxLength: 20 })} className='mb-2' placeholder='Name' />
                 <textarea  {...register("description", { pattern: /^[A-Za-z.,!"&#]+$/i })} className='mb-2' placeholder='Description'/>
                 <input type="number" {...register("price", { min: 50, max: 100000 })} className='mb-2' placeholder='Price (min:50)' />
 

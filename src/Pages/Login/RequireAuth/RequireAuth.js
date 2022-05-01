@@ -3,7 +3,6 @@ import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/aut
 import { Navigate, useLocation } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
 const RequireAuth = ({children}) => {
@@ -19,6 +18,7 @@ const RequireAuth = ({children}) => {
     if(loading){
         return <Loading></Loading>
     }
+
     // 2nd, jodi user login na thake tahohe then navigate kore login e pathabo
     if (!user) {
         return <Navigate to="/login" state={{from:location}} replace />;
@@ -29,7 +29,7 @@ const RequireAuth = ({children}) => {
             <h3 className='text-danger'>Your email not varified!</h3>
             <h4 className='text-success'>plz varified!</h4>
             <button onClick={async () => {await sendEmailVerification(); toast('Sent email check inbox/spam');}} 
-            className='btn btn-warning'>ReSend Verification email</button>
+            className='btn btn-warning'>Resend Verification email</button>
             <ToastContainer></ToastContainer>
         </div>
         

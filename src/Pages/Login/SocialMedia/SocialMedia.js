@@ -5,8 +5,8 @@ import github from '../../../Images/social/github.png';
 import { useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Loading from '../../Shared/Loading/Loading';
 import useToken from '../../../hooks/useToken';
+
 const SocialMediaLogin = () => {
     // google-1st
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -20,8 +20,7 @@ const SocialMediaLogin = () => {
     const from = location?.state?.from?.pathname || "/";
     // for jwt token
     const [token] = useToken(user ||fbUser|| githubUser);
-
-
+    
     // signin to navigate
     const navigate = useNavigate();
     // social btn blink issue 
@@ -29,13 +28,11 @@ const SocialMediaLogin = () => {
     //error showing
     // return: errorBtnElement=
     if (error ||fbError|| gitError) {
-        errorBtnElement = <p className='text-danger text-center'>Error: {error?.message} {gitError?.message}</p>
-    }
-    if (loading||fbLoading|| gitLoading ) {
-    return <Loading></Loading>
+        errorBtnElement = <p className='text-danger text-center'>Error: {error?.message} {fbError?.message} {gitError?.message}</p>
     }
 
     // user signin to navigate
+    console.log(token);
     if (token) {
         navigate(from,{replace:true});
   

@@ -10,13 +10,11 @@ const useToken = user => {
             if (email) {
                 const { data } = await axios.post('http://localhost:5000/login', { email });
                 // console.log(data);
-                setToken(data.accessToken)
+                setToken(data.accessToken);
                 localStorage.setItem('accessToken', data.accessToken);
             }
-
         }
         getToken();
-
     }, [user]);
     return [token];
 }

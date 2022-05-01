@@ -6,9 +6,9 @@ const axiosPrivate = axios.create({});
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
     // Send jwt token in the server
-    if (!config.headers.authorization) {
-        config.headers.authorization = `Bearer ${localStorage.getItem('accessToken')}`
-    }
+    if(!config.headers.authorization){
+      config.headers.authorization = `Bearer ${localStorage.getItem('accessToken')}`
+  }
     return config;
   }, function (error) {
     // Do something with request error
